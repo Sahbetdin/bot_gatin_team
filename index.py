@@ -47,6 +47,8 @@ class InitiativeBot:
             res = self.s.fetch_all('users', ["is_agree_to_save_name"], 
                      f"user_tg_id={update.effective_user.id}" ,(), True)
             if len(res) > 0:
+                await update.message.reply_text("Ваша следующая идея записана.")
+                context.user_data['state'] = 'finished'
                 return
             
             # Create inline keyboard
