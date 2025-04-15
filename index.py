@@ -50,6 +50,8 @@ class InitiativeBot:
                 ]
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
+            
+			
             # Ask if user wants to save name
             await update.message.reply_text(
                 "Желаете ли Вы, чтобы я сохранил Ваше имя пользователя для последующего обращения?",

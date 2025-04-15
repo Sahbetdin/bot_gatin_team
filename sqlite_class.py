@@ -120,7 +120,7 @@ class SQLiteDB:
             raise ValueError("Empty data list provided")
         
         fieldnames = data[0].keys()
-        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+        with open(filename, 'w', newline='', encoding='utf-16') as csvfile:
             writer = csv.writer(csvfile)
             # Write header
             writer.writerow(fieldnames)
