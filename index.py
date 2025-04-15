@@ -42,6 +42,13 @@ class InitiativeBot:
         if context.user_data.get('state') == 'waiting_for_initiative':
             # Store the initiative
             context.user_data['initiative'] = update.message.text
+
+            # if user found then fon't ask his name
+            res = self.s.fetch_all('users', ["is_agree_to_save_name"], 
+                     f"user_tg_id={update.effective_user.id}" ,(), True)
+            if len(res) > 0:
+                return
+            
             # Create inline keyboard
             keyboard = [
                 [
@@ -50,8 +57,6 @@ class InitiativeBot:
                 ]
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
-            
-			
             # Ask if user wants to save name
             await update.message.reply_text(
                 "Желаете ли Вы, чтобы я сохранил Ваше имя пользователя для последующего обращения?",
@@ -68,8 +73,9 @@ class InitiativeBot:
 
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Send a message when the command /start is issued."""
-        # 329200678 real
-        if update.effective_user.id in (329200678,):
+        # 329200678 mansur
+        # 340857665 gatin al
+        if update.effective_user.id in (340857665, 329200678):
             self.res_file_ = f"{self.res_file}{datetime.now().strftime("%Y%m%d_%H_%M")}.csv"
             # print(self.res_file_)
             self.s.select_to_csv(table_name1='users', table_name2='ideas',

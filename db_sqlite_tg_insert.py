@@ -50,12 +50,31 @@ s = SQLiteDB(db_name = 'ideas_users.db')
 # conn.close()
 
 
+#    def fetch_all(self, table_name: str, 
+#                   columns: List[str] = None, 
+#                   condition: str = None, 
+#                   params: tuple = (),
+#                   is_limit_one: bool = False):
+#         cols = '*' if columns is None else ', '.join(columns)
+#         query = f"SELECT {cols} FROM {table_name}"
+#         if condition:
+#             query += f" WHERE {condition}"
+#         if is_limit_one:
+#             query += f" LIMIT 1"
+#         self.execute_query(query, params)
+#         columns = [desc[0] for desc in self.cursor.description] if self.cursor.description else []
+#         return [dict(zip(columns, row)) for row in self.cursor.fetchall()]
+    
+
 # SELECT users
-# res = s.fetch_all('ideas', None, () ,(), False)
-# if len(res) == 0:
-#     print('Not found')
-# else:
-#     for r in res:
-# 	    print(r)
+id_to_check = 329200678
+res = s.fetch_all('users', ["is_agree_to_save_name"], f"user_tg_id={id_to_check}" ,(), True)
+if len(res) == 0:
+    print('Not found')
+else:
+    print("User found")
+    
+    # for r in res:
+	#     print(r)
 
 
